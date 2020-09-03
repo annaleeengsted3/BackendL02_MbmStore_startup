@@ -1,0 +1,43 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Customers</title>
+    <style>
+        .customer{
+            margin-bottom: 50px;
+        }
+        .fullname{
+            font-weight: 700;
+        }
+        .address{
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Customers</h1>
+
+    @foreach (MbmStore.Models.Customer name in ViewBag.Customers) 
+    { <div class="customer">
+        <p class="fullname"> <span>@name.FirstName </span> @name.LastName  <span>
+    @*@foreach (string numbers in name.PhoneNumbers)
+        {<span>@numbers </span>}*@
+    @String.Join(", ", name.PhoneNumbers);
+</span></p>
+        <p class="address">@name.Address</p>
+        <p class="address">@name.Zip @name.City</p>
+        <p >@name.FirstName is @name.Age years old. </p>
+     
+    </div>
+
+}
+
+
+
+</body>
+</html>
