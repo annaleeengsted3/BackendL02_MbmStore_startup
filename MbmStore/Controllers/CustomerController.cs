@@ -15,17 +15,18 @@ namespace MbmStore.Controllers
             var cust2 = new Customer("Jane", "Doe", "Otherstreet 13", "2000", "Othercity");
             var cust3 = new Customer("Moe", "Lester", "Shadystreet 69", "4200", "Shadycity");
             //this is dumb:
+         
             cust1.AddPhone("11223344");
-            cust1.BirthDate = new DateTime(2016, 7, 15);
-            cust2.BirthDate = new DateTime(1992, 7, 15);
-            cust3.BirthDate = new DateTime(1990, 7, 15);
             cust2.AddPhone("12345678");
             cust2.AddPhone("00998877");
             cust3.AddPhone("69696969");
 
-        
+            cust1.BirthDate = new DateTime(2016, 7, 15);
+            cust2.BirthDate = new DateTime(1992, 7, 15);
+            cust3.BirthDate = new DateTime(1990, 7, 15);
 
-            List<Customer> customers = new List<Customer>();
+
+         List<Customer> customers = new List<Customer>();
             customers.Add(cust1);
             customers.Add(cust2);
             customers.Add(cust3);

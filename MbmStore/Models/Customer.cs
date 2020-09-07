@@ -10,6 +10,15 @@ namespace MbmStore.Models
     public class Customer
     {
         //shortcut: "prop" + tab
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string  Address { get; set; }
+        public string  Zip { get; set; }
+        public string  City { get; set; }
+
+        //private List<string> phoneNumbers;
+        //private List<string> phoneNumbers = new List<string>();
         private DateTime birthDate;
         private int age;
         public DateTime BirthDate
@@ -18,9 +27,9 @@ namespace MbmStore.Models
             set
             {
                 //also dumb, have to assign birthdate the value before validating- fix***
-                birthDate = value;
-                if (this.Age > 120 || this.Age <0)
-                { throw new Exception("Age not accepted" + this.Age + "birthdt year:" + birthDate); }
+                //birthDate = value;
+                if (DateTime.Now.Year - value.Year > 120 || DateTime.Now.Year - value.Year <0)
+                { throw new Exception("Age not accepted" + this.Age + "birthday year:" + birthDate); }
                 else { birthDate = value; }
        
             }
@@ -47,14 +56,18 @@ namespace MbmStore.Models
                 return age;
             } }
 
+        //both are right
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string  Address { get; set; }
-        public string  Zip { get; set; }
-        public string  City { get; set; }
-       
-        public List<string> PhoneNumbers { get; } = new List<string>();
+        //public List<string> PhoneNumbers
+        //{
+        //    get
+        //    {
+        //        return phoneNumbers;
+        //    }
+
+        //}
+
+        public List<string> PhoneNumbers { get; private set; } = new List<string>();
 
 
 
@@ -68,13 +81,15 @@ namespace MbmStore.Models
             Zip = zip;
             City = city;
             //PhoneNumber = phoneNumber;
-           
+            //BirthDate = birthDate;
+
 
         }
 
 
         public void AddPhone(string phone){
-            this.PhoneNumbers.Add(phone);
+            //phoneNumbers.Add(phone);
+            PhoneNumbers.Add(phone);
         }
 
 
