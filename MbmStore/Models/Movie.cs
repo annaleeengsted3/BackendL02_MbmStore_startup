@@ -5,15 +5,14 @@ using System.Web;
 
 namespace MbmStore.Models
 {
-    public class Movie
+    public class Movie : Product
     {
         // fields
-        private decimal price;
-        //private string imageFileName;
+    
         private string director;
 
         // properties
-        public string Title { get; }
+        //public string Title { get; }
         public string Director {
             set { director = value; }
             get { return director; }
@@ -21,41 +20,37 @@ namespace MbmStore.Models
 
 
 
-        public string ImageFileName { get; set; }
+       //public string ImageFileName { get; set; }
 
-        public decimal Price
-        {
-            set
-            {
-                if (value <= 0)
-                {
-                    throw new Exception("Price is not accepted");
-                }
-                else
-                {
-                    price = value;
-                }
-            }
-            get { return price; }
-        }
+        //public decimal Price
+        //{
+        //    set
+        //    {
+        //        if (value <= 0)
+        //        {
+        //            throw new Exception("Price is not accepted");
+        //        }
+        //        else
+        //        {
+        //            price = value;
+        //        }
+        //    }
+        //    get { return price; }
+        //}
 
 
         // constructors
         public Movie() { }
 
-        public Movie(string title, decimal price)
+        public Movie(string title, decimal price) : base(title, price)
         {
-            Title = title;
-            this.price = price;
-           
         }
 
-        public Movie(string title, decimal price, string imageFileName, string director)
+        public Movie(string title, decimal price, string imageFileName, string director) : base(title, price)
         {
-            Title = title;
-            this.price = price;
+   
             ImageFileName = imageFileName;
-            this.director = director;
+            Director = director;
         }
     }
 }

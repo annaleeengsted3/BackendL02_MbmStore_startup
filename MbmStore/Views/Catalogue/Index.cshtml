@@ -1,0 +1,117 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Catalogue</title>
+    <style>
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-column-gap: 20px;
+        }
+
+        .cd {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .bold {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <h1>Products</h1>
+
+    <section class="products">
+        <section class="books">
+            @foreach (MbmStore.Models.Book book in ViewBag.Books)
+            {<article class="book">
+                    <p class="title">
+                        <span class="bold">Title: </span> @book.Title
+                    </p>
+                    <p>
+                        <span class="bold">Author: </span> @book.Author
+                    </p>
+                    <p>
+                        <span class="bold">Price: </span> @book.Price
+                    </p>
+                    <p>
+                        <span class="bold">Publisher: </span> @book.Publisher
+                    </p>
+                    <p>
+                        <span class="bold">ISBN: </span> @book.ISBN
+                    </p>
+                    <img src="@book.ImageFileName" alt="@book.ImageFileName" />
+
+                </article>
+
+            }
+
+        </section>
+
+        <section class="cds">
+            @foreach (MbmStore.Models.MusicCD cd in ViewBag.CDs)
+            {<article class="cd">
+                    <div>
+                        <p class="title">
+                            <span class="bold">Album: </span> @cd.Title
+                        </p>
+                        <p>
+                            <span class="bold">Artist: </span> @cd.Artist
+                        </p>
+                        <p>
+                            <span class="bold">Price: </span> @cd.Price
+                        </p>
+                        <p>
+                            <span class="bold">Released: </span> @cd.Released
+                        </p>
+                        <img src="@cd.ImageFileName" alt="@cd.ImageFileName" />
+                    </div>
+                    <div>
+                        <p>Tracks:</p>
+                        <ol>
+                            @foreach (MbmStore.Models.Track track in cd.Tracks)
+                            {
+                                <li>
+                                    <p>Title: @track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</p>
+                                </li>
+                            }
+
+                        </ol>
+                        <p><span class="bold">Total playing time:</span>@cd.GetPlayingTime()</p>
+                    </div>
+
+                </article>
+
+            }
+
+        </section>
+
+        <section class="movies">
+            @foreach (MbmStore.Models.Movie movie in ViewBag.Movies)
+            {<article class="movie">
+    <p class="title">
+        <span class="bold">Title: </span> @movie.Title
+    </p>
+    <p>
+        <span class="bold">Director: </span> @movie.Director
+    </p>
+    <p>Price: @String.Format("{0:0.00}", movie.Price)</p>
+    <p><img src="/Images/@movie.ImageFileName" alt="@movie.Title" /></p>
+
+</article>
+
+            }
+
+        </section>
+
+
+
+    </section>
+
+</body>
+</html>
