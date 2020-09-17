@@ -11,9 +11,9 @@ namespace MbmStore.Controllers
     {
         public IActionResult Index()
         {
-            var cust1 = new Customer("John", "Doe", "Somestreet 27", "8464", "Somecity");
-            var cust2 = new Customer("Jane", "Doe", "Otherstreet 13", "2000", "Othercity");
-            var cust3 = new Customer("Moe", "Lester", "Shadystreet 69", "4200", "Shadycity");
+            var cust1 = new Customer(1, "John", "Doe", "Somestreet 27", "8464", "Somecity");
+            var cust2 = new Customer(2, "Jane", "Doe", "Otherstreet 13", "2000", "Othercity");
+            var cust3 = new Customer(3, "Moe", "Lester", "Shadystreet 69", "4200", "Shadycity");
             //this is dumb:
          
             cust1.AddPhone("11223344");

@@ -1,4 +1,5 @@
-﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+﻿@using MbmStore.Models;
+@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
 
 <!DOCTYPE html>
 
@@ -28,7 +29,7 @@
 
     <section class="products">
         <section class="books">
-            @foreach (MbmStore.Models.Book book in ViewBag.Books)
+            @foreach (Book book in ViewBag.Books)
             {<article class="book">
                     <p class="title">
                         <span class="bold">Title: </span> @book.Title
@@ -54,7 +55,7 @@
         </section>
 
         <section class="cds">
-            @foreach (MbmStore.Models.MusicCD cd in ViewBag.CDs)
+            @foreach (MusicCD cd in ViewBag.CDs)
             {<article class="cd">
                     <div>
                         <p class="title">
@@ -64,7 +65,7 @@
                             <span class="bold">Artist: </span> @cd.Artist
                         </p>
                         <p>
-                            <span class="bold">Price: </span> @cd.Price
+                            <span class="bold">Price: </span>  @String.Format("{0:0.00}", cd.Price)
                         </p>
                         <p>
                             <span class="bold">Released: </span> @cd.Released
@@ -74,7 +75,7 @@
                     <div>
                         <p>Tracks:</p>
                         <ol>
-                            @foreach (MbmStore.Models.Track track in cd.Tracks)
+                            @foreach (Track track in cd.Tracks)
                             {
                                 <li>
                                     <p>Title: @track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</p>
@@ -82,7 +83,7 @@
                             }
 
                         </ol>
-                        <p><span class="bold">Total playing time:</span>@cd.GetPlayingTime()</p>
+                        <p><span class="bold">Total playing time:</span>@cd.PlayingTime.ToString(@"hh\:mm\:ss")</p>
                     </div>
 
                 </article>
@@ -92,7 +93,7 @@
         </section>
 
         <section class="movies">
-            @foreach (MbmStore.Models.Movie movie in ViewBag.Movies)
+            @foreach (Movie movie in ViewBag.Movies)
             {<article class="movie">
     <p class="title">
         <span class="bold">Title: </span> @movie.Title

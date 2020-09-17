@@ -60,8 +60,10 @@ namespace MbmStore.Controllers
             ViewBag.CDs = CDs;
             ViewBag.Movies = Movies;
 
-        
-           
+    
+
+
+
             return View();
         }
     }

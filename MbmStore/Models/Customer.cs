@@ -11,14 +11,14 @@ namespace MbmStore.Models
     {
         //shortcut: "prop" + tab
 
+        public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string  Address { get; set; }
         public string  Zip { get; set; }
         public string  City { get; set; }
 
-        //private List<string> phoneNumbers;
-        //private List<string> phoneNumbers = new List<string>();
+    
         private DateTime birthDate;
         private int age;
         public DateTime BirthDate
@@ -26,8 +26,7 @@ namespace MbmStore.Models
           
             set
             {
-                //also dumb, have to assign birthdate the value before validating- fix***
-                //birthDate = value;
+             
                 if (DateTime.Now.Year - value.Year > 120 || DateTime.Now.Year - value.Year <0)
                 { throw new Exception("Age not accepted" + this.Age + "birthday year:" + birthDate); }
                 else { birthDate = value; }
@@ -56,8 +55,7 @@ namespace MbmStore.Models
                 return age;
             } }
 
-        //both are right
-
+        //both of these properties for PhoneNumbers are read-only?:
         //public List<string> PhoneNumbers
         //{
         //    get
@@ -68,28 +66,47 @@ namespace MbmStore.Models
         //}
 
         public List<string> PhoneNumbers { get; private set; } = new List<string>();
+        public List<Invoice> Invoices { get; set; } = new List<Invoice>();
 
 
 
         //shortcut: "ctor" + tab tab
-        //Constructor:
-        public Customer(string firstName, string lastName, string address, string zip, string city)
+     
+        //public Customer(string firstName, string lastName, string address, string zip, string city)
+        //{
+        //    FirstName = firstName;
+        //    LastName = lastName;
+        //    Address = address;
+        //    Zip = zip;
+        //    City = city;
+        //    //PhoneNumber = phoneNumber;
+        //    //BirthDate = birthDate;
+
+
+        //}
+
+        public Customer(int customerId, string firstName, string lastName, string address, string zip, string city)
         {
+            CustomerId = customerId;
             FirstName = firstName;
             LastName = lastName;
             Address = address;
             Zip = zip;
             City = city;
-            //PhoneNumber = phoneNumber;
-            //BirthDate = birthDate;
+         
 
 
         }
 
 
         public void AddPhone(string phone){
-            //phoneNumbers.Add(phone);
             PhoneNumbers.Add(phone);
+        }
+
+        public void AddInvoice(Invoice invoice)
+        {
+           
+            Invoices.Add(invoice);
         }
 
 

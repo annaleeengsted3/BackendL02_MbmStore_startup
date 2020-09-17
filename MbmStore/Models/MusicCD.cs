@@ -10,6 +10,19 @@ namespace MbmStore.Models
         public string Artist { get; set; }
         public string Label { get; set; }
         public short Released { get; set; }
+        public TimeSpan PlayingTime {
+
+            get
+            {
+                var totalTime = new TimeSpan(0, 0, 0);
+                foreach (Track track in Tracks)
+                {
+                    totalTime = totalTime + track.Length;
+                }
+                return totalTime;
+            } 
+            private set { } 
+        }
 
         //private List<string> tracks = new List<string>();
         public List<Track> Tracks { get; private set; } = new List<Track>();
@@ -23,7 +36,6 @@ namespace MbmStore.Models
 
         public void AddTrack(Track track)
         {
-            //phoneNumbers.Add(phone);
             Tracks.Add(track);
         }
 

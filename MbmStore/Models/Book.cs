@@ -17,10 +17,8 @@ namespace MbmStore.Models
         public Book(string author, string title, decimal price, short published) : base(title, price)
         {
             Author = author;
-            //Title = title;
-            //Price = price;
             Published = published;
-            //default ISBN right now, change later:
+            //default ISBN right now just for the view, change later:
             ISBN = "1234567890";
         }
 
