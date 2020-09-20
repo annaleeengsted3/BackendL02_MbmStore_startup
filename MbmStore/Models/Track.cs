@@ -15,7 +15,7 @@ namespace MbmStore.Models
         public Track(string title) {
            Title = title;
             //defaults, change later:
-            Composer = "DefaultComposer";
+            Composer = "Feat. a default composer";
             Length = new TimeSpan(0, 3, 18);
         }
 

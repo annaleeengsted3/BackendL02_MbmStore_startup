@@ -7,6 +7,8 @@ namespace MbmStore.Models
 {
     public class Product
     {
+        private decimal price { get; set; }
+
         public int ProductId { get; set; }
         public string Title { get; set; }
      
@@ -20,11 +22,11 @@ namespace MbmStore.Models
                 }
                 else
                 {
-                    Price = value;
+                    price = value;
                 }
             }
 
-            get { return Price; }
+            get { return price; }
         }
         public string ImageFileName { get; set; }
 
@@ -32,8 +34,8 @@ namespace MbmStore.Models
         public Product(string title, decimal price) {
             Title = title;
             Price = price;
-            //default image just for the view right now, change later:
-            ImageFileName = "https://via.placeholder.com/250";
+            //default image just for the sake of the view right now, change later:
+            ImageFileName = "https://via.placeholder.com/200";
         }
 
     }

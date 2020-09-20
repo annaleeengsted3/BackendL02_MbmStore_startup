@@ -1,0 +1,80 @@
+﻿@addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@using MbmStore.Models;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Invoices</title>
+    <style>
+        .grid3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .container{
+            display: grid
+        }
+
+      .product-price{
+          display: flex;
+          justify-content: space-between;
+      }
+        .item {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-column: span 3;
+            margin-bottom: 50px;
+        }
+        .span2{
+            grid-column: span 2;
+        }
+        .total {
+            grid-column: 2 / span 2;
+        }
+        .bold{
+            font-weight: 700;
+        }
+
+        h3:nth-child(3) {
+            justify-self: end;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>Invoices</h1>
+    <div class="grid3">   
+        <h3>Customer</h3> <h3> Product </h3> <h3>Price</h3>
+   
+        @foreach (Invoice invoice in ViewBag.Invoices)
+        {<div class="item">
+                <p class="fullname">
+                    @invoice.Customer.FirstName  @invoice.Customer.LastName
+                </p>
+                <div class="span2">
+                    @{decimal totalPrice = 0M;}
+                    @foreach (OrderItem order in invoice.OrderItems)
+                    {
+                        <div class="product-price">
+                            <p>
+                                @order.Product.Title (@order.Product.GetType().Name)
+                            </p>
+                            <p>@String.Format("{0:0.00}", order.Product.Price)</p>
+                            @{totalPrice = totalPrice + order.Product.Price; }
+                        </div>
+                    }
+                </div>
+                <div class="product-price total">
+                    <p class="bold">Total:</p>
+                    <p class="bold">@totalPrice</p>
+                </div>
+            </div>
+
+        }
+
+    </div>
+
+        </body>
+        </html>

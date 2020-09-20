@@ -8,15 +8,23 @@
     <meta name="viewport" content="width=device-width" />
     <title>Catalogue</title>
     <style>
+        img{
+            max-width: 200px;
+        }
+        article {
+            margin-bottom: 25px;
+            border: 1px solid #d9d9d9;
+        }
+        .book, .cd .top, .movie {
+            display: flex;
+        }
+            .book img, .cd .top img, .movie img {
+                margin-right: 5px;
+            }
         .products {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-column-gap: 20px;
-        }
-
-        .cd {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
         }
 
         .bold {
@@ -29,25 +37,27 @@
 
     <section class="products">
         <section class="books">
+            <h2> The Books </h2>
             @foreach (Book book in ViewBag.Books)
             {<article class="book">
-                    <p class="title">
-                        <span class="bold">Title: </span> @book.Title
-                    </p>
-                    <p>
-                        <span class="bold">Author: </span> @book.Author
-                    </p>
-                    <p>
-                        <span class="bold">Price: </span> @book.Price
-                    </p>
-                    <p>
-                        <span class="bold">Publisher: </span> @book.Publisher
-                    </p>
-                    <p>
-                        <span class="bold">ISBN: </span> @book.ISBN
-                    </p>
                     <img src="@book.ImageFileName" alt="@book.ImageFileName" />
-
+                    <div>
+                        <p class="title">
+                            <span class="bold">Title: </span> @book.Title
+                        </p>
+                        <p>
+                            <span class="bold">Author: </span> @book.Author
+                        </p>
+                        <p>
+                            <span class="bold">Price: </span> @book.Price
+                        </p>
+                        <p>
+                            <span class="bold">Publisher: </span> @book.Publisher
+                        </p>
+                        <p>
+                            <span class="bold">ISBN: </span> @book.ISBN
+                        </p>
+                    </div>
                 </article>
 
             }
@@ -55,25 +65,28 @@
         </section>
 
         <section class="cds">
+            <h2> The CDs </h2>
             @foreach (MusicCD cd in ViewBag.CDs)
             {<article class="cd">
-                    <div>
-                        <p class="title">
-                            <span class="bold">Album: </span> @cd.Title
-                        </p>
-                        <p>
-                            <span class="bold">Artist: </span> @cd.Artist
-                        </p>
-                        <p>
-                            <span class="bold">Price: </span>  @String.Format("{0:0.00}", cd.Price)
-                        </p>
-                        <p>
-                            <span class="bold">Released: </span> @cd.Released
-                        </p>
+                    <div class="top">
                         <img src="@cd.ImageFileName" alt="@cd.ImageFileName" />
+                        <div>
+                            <p class="title">
+                                <span class="bold">Album: </span> @cd.Title
+                            </p>
+                            <p>
+                                <span class="bold">Artist: </span> @cd.Artist
+                            </p>
+                            <p>
+                                <span class="bold">Price: </span>  @String.Format("{0:0.00}", cd.Price)
+                            </p>
+                            <p>
+                                <span class="bold">Released: </span> @cd.Released
+                            </p>
+                        </div>
                     </div>
                     <div>
-                        <p>Tracks:</p>
+                        <p class="bold">Tracks:</p>
                         <ol>
                             @foreach (Track track in cd.Tracks)
                             {
@@ -83,7 +96,7 @@
                             }
 
                         </ol>
-                        <p><span class="bold">Total playing time:</span>@cd.PlayingTime.ToString(@"hh\:mm\:ss")</p>
+                        <p><span class="bold">Total playing time: </span>@cd.PlayingTime.ToString(@"hh\:mm\:ss")</p>
                     </div>
 
                 </article>
@@ -93,18 +106,20 @@
         </section>
 
         <section class="movies">
+            <h2> The Movies </h2>
             @foreach (Movie movie in ViewBag.Movies)
             {<article class="movie">
-    <p class="title">
-        <span class="bold">Title: </span> @movie.Title
-    </p>
-    <p>
-        <span class="bold">Director: </span> @movie.Director
-    </p>
-    <p>Price: @String.Format("{0:0.00}", movie.Price)</p>
-    <p><img src="/Images/@movie.ImageFileName" alt="@movie.Title" /></p>
-
-</article>
+                    <p><img src="@movie.ImageFileName" alt="@movie.Title" /></p>
+                    <div>
+                        <p class="title">
+                            <span class="bold">Title: </span> @movie.Title
+                        </p>
+                        <p>
+                            <span class="bold">Director: </span> @movie.Director
+                        </p>
+                        <p><span class="bold">Price:</span> @String.Format("{0:0.00}", movie.Price)</p>
+                    </div>
+                </article>
 
             }
 

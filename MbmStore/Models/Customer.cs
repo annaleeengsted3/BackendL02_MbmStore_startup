@@ -20,7 +20,7 @@ namespace MbmStore.Models
 
     
         private DateTime birthDate;
-        private int age;
+       
         public DateTime BirthDate
         {
           
@@ -53,7 +53,9 @@ namespace MbmStore.Models
                 }
 
                 return age;
-            } }
+            }
+        private set { }
+        }
 
         //both of these properties for PhoneNumbers are read-only?:
         //public List<string> PhoneNumbers
@@ -71,19 +73,7 @@ namespace MbmStore.Models
 
 
         //shortcut: "ctor" + tab tab
-     
-        //public Customer(string firstName, string lastName, string address, string zip, string city)
-        //{
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    Address = address;
-        //    Zip = zip;
-        //    City = city;
-        //    //PhoneNumber = phoneNumber;
-        //    //BirthDate = birthDate;
-
-
-        //}
+   
 
         public Customer(int customerId, string firstName, string lastName, string address, string zip, string city)
         {
