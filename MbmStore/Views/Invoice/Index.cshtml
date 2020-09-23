@@ -45,9 +45,15 @@
 </head>
 <body>
     <h1>Invoices</h1>
-    <div class="grid3">   
+    <form method="post" asp-controller="Invoice" asp-action="index">
+        <div>
+            <select name="customer" id="customer" asp-items="@ViewBag.Customers as List<SelectListItem>"></select>
+            <button type="submit">Show invoices</button>
+        </div>
+    </form>
+    <div class="grid3">
         <h3>Customer</h3> <h3> Product </h3> <h3>Price</h3>
-   
+
         @foreach (Invoice invoice in ViewBag.Invoices)
         {<div class="item">
                 <p class="fullname">
@@ -68,7 +74,7 @@
                 </div>
                 <div class="product-price total">
                     <p class="bold">Total:</p>
-                    <p class="bold">@totalPrice</p>
+                    <p class="bold">@String.Format("{0:0.00}", totalPrice)</p>
                 </div>
             </div>
 
@@ -76,5 +82,5 @@
 
     </div>
 
-        </body>
+</body>
         </html>

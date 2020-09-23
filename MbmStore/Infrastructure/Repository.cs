@@ -84,8 +84,17 @@ namespace MbmStore.Infrastructure
             Invoice2.AddOrderItem(Movie2, 2);
             Invoice2.AddOrderItem(Book1, 7);
 
+            Invoice Invoice3 = new Invoice(3, new DateTime(2020, 9, 9), cust3);
+            Invoice3.AddOrderItem(Movie2, 2);
+
+            Invoice Invoice4 = new Invoice(4, new DateTime(2020, 4, 9), cust1);
+            Invoice4.AddOrderItem(Movie2, 2);
+
+
             Invoices.Add(Invoice1);
             Invoices.Add(Invoice2);
+            Invoices.Add(Invoice3);
+            Invoices.Add(Invoice4);
 
         }
     }
