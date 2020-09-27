@@ -60,21 +60,22 @@
                     @invoice.Customer.FirstName  @invoice.Customer.LastName
                 </p>
                 <div class="span2">
-                    @{decimal totalPrice = 0M;}
+                    @*@{decimal totalPrice = 0M;}*@
                     @foreach (OrderItem order in invoice.OrderItems)
                     {
                         <div class="product-price">
                             <p>
-                                @order.Product.Title (@order.Product.GetType().Name)
+                             @order.Quantity x   @order.Product.Title (@order.Product.GetType().Name)
                             </p>
-                            <p>@String.Format("{0:0.00}", order.Product.Price)</p>
-                            @{totalPrice = totalPrice + order.Product.Price; }
+                            <p>(@order.Quantity x @String.Format("{0:0.00}", order.Product.Price)) @String.Format("{0:0.00}", order.TotalPrice) </p>
+                            @*@{totalPrice = totalPrice + order.Product.Price; }*@
                         </div>
                     }
                 </div>
                 <div class="product-price total">
                     <p class="bold">Total:</p>
-                    <p class="bold">@String.Format("{0:0.00}", totalPrice)</p>
+                    @*<p class="bold">@String.Format("{0:0.00}", totalPrice)</p>*@
+                    <p class="bold">@invoice.TotalPrice</p>
                 </div>
             </div>
 

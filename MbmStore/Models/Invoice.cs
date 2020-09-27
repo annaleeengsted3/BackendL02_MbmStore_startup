@@ -9,9 +9,21 @@ namespace MbmStore.Models
     public class Invoice
     {
         private decimal totalPrice;
+        public decimal TotalPrice
+        {
+            get
+            {
+                decimal totalPrice = 0;
+                foreach (OrderItem orderItem in OrderItems)
+                {
+                    totalPrice = totalPrice + orderItem.TotalPrice;
+                }
+                return totalPrice;
+            }
+        }
         public int InvoiceId { get; set; }
         public DateTime OrderDate { get; set; }
-        public decimal TotalPrice { get; private set; }
+       
 
         public Customer Customer { get; set; }
 
