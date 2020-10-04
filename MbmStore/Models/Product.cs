@@ -31,9 +31,10 @@ namespace MbmStore.Models
         public string ImageFileName { get; set; }
 
         public Product() { }
-        public Product(string title, decimal price) {
+        public Product(int productId, string title, decimal price) {
             Title = title;
             Price = price;
+            ProductId = productId;
             //default image just for the sake of the view right now, change later:
             ImageFileName = "https://via.placeholder.com/200";
         }

@@ -18,19 +18,22 @@ namespace MbmStore.Models
                 var totalTime = new TimeSpan(0, 0, 0);
                 foreach (Track track in Tracks)
                 {
-                    totalTime = totalTime + track.Length;
+                    //totalTime = totalTime + track.Length;
+                    //alternative:
+                    totalTime += track.Length;
                 }
                 return totalTime;
             } 
             private set { } 
         }
 
-        //private List<string> tracks = new List<string>();
+        //private List<string> Tracks = new List<string>();
         public List<Track> Tracks { get; private set; } = new List<Track>();
 
 
         //public MusicCD() { }
-        public MusicCD(string artist, string title, decimal price, short released) : base(title, price) {
+        public MusicCD(int productId, string artist, string title, decimal price, short released) : base(productId, title, price)
+        {
             Artist = artist;
             Released = released;
         }

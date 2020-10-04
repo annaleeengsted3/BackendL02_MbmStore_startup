@@ -13,23 +13,23 @@ namespace MbmStore.Controllers
         {
 
             // create a new Movie object with instance name jungleBook
-            var jungleBook = new Movie("Jungle Book", 160.50m, "junglebook.jpg", "Walt Disney");
-            var tarzan = new Movie("Tarzan", 120.80m, "tarzan.jpg", "Walt Disney");
-            var frozen = new Movie("Frozen", 230.00m, "frozen.jpg", "Walt Disney");
+            Movie Movie1 = new Movie(6, "Jungle Book", 160, "/Images/junglebook.jpg", "Walt Disney");
+            Movie Movie2 = new Movie(7, "Tarzan", 120, "/Images/tarzan.jpg", "Walt Disney");
+            Movie Movie3 = new Movie(8, "Frozen", 230, "/Images/frozen.jpg", "Walt Disney");
 
             // assign a ViewBag property to the new Movie object
-            ViewBag.JungleBook = jungleBook;
-            ViewBag.Tarzan = tarzan;
-            ViewBag.Frozen = frozen;
+            ViewBag.JungleBook = Movie1;
+            ViewBag.Tarzan = Movie2;
+            ViewBag.Frozen = Movie3;
 
             //var movieArray = new Movie[] { jungleBook, tarzan, frozen};
 
             //USE THE LIST CLASS 
 
             List<Movie> moviesList = new List<Movie>();
-            moviesList.Add(frozen);
-            moviesList.Add(jungleBook);
-            moviesList.Add(tarzan);
+            moviesList.Add(Movie1);
+            moviesList.Add(Movie2);
+            moviesList.Add(Movie3);
 
             ViewBag.Movies = moviesList;
             // return the default view

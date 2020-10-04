@@ -19,11 +19,11 @@ namespace MbmStore.Models
 
         // constructors
     
-        public Movie(string title, decimal price) : base(title, price)
+        public Movie(int productId, string title, decimal price) : base(productId, title, price)
         {
         }
 
-        public Movie(string title, decimal price, string imageFileName, string director) : base(title, price)
+        public Movie(int productId, string title, decimal price, string imageFileName, string director) : base(productId, title, price)
         {
             //overwrites the default images in Product:
      ImageFileName = imageFileName;

@@ -1,5 +1,12 @@
 ﻿@using MbmStore.Models;
+@using MbmStore.Infrastructure;
 @addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
+@model IEnumerable<Product>
+@{
+    //this just creates the metatitle
+    ViewData["Title"] = "Products";
+}
+@{ var numOfChoices = 11; }
 
 <!DOCTYPE html>
 
@@ -8,19 +15,26 @@
     <meta name="viewport" content="width=device-width" />
     <title>Catalogue</title>
     <style>
-        img{
+        img {
             max-width: 200px;
         }
+
         article {
             margin-bottom: 25px;
-            border: 1px solid #d9d9d9;
         }
+
+        button {
+            margin-bottom: 50px;
+        }
+
         .book, .cd .top, .movie {
             display: flex;
         }
+
             .book img, .cd .top img, .movie img {
                 margin-right: 5px;
             }
+
         .products {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -38,90 +52,170 @@
     <section class="products">
         <section class="books">
             <h2> The Books </h2>
-            @foreach (Book book in ViewBag.Books)
-            {<article class="book">
-                    <img src="@book.ImageFileName" alt="@book.ImageFileName" />
-                    <div>
-                        <p class="title">
-                            <span class="bold">Title: </span> @book.Title
-                        </p>
-                        <p>
-                            <span class="bold">Author: </span> @book.Author
-                        </p>
-                        <p>
-                            <span class="bold">Price: </span> @book.Price
-                        </p>
-                        <p>
-                            <span class="bold">Publisher: </span> @book.Publisher
-                        </p>
-                        <p>
-                            <span class="bold">ISBN: </span> @book.ISBN
-                        </p>
-                    </div>
-                </article>
+            <table>
+                @foreach (Book book in Model.OfType<Book>().ToList())
+                {
+                    <tr>
+                        <td valign="top"> <img src="@book.ImageFileName" alt="@book.Title" style="width:100px" /> </td>
+                        <td valign="top" style="width:250px">
+                            <article class="book">
+                                @*  <img src="@book.ImageFileName" alt="@book.ImageFileName" />*@
+                                <div>
+                                    <p class="title">
+                                        <span class="bold">Title: </span> @book.Title
+                                    </p>
+                                    <p>
+                                        <span class="bold">Author: </span> @book.Author
+                                    </p>
+                                    <p>
+                                        <span class="bold">Price: </span> @book.Price
+                                    </p>
+                                    <p>
+                                        <span class="bold">Publisher: </span> @book.Publisher (@book.Published)
+                                    </p>
+                                    <p>
+                                        <span class="bold">ISBN: </span> @book.ISBN
+                                    </p>
+                                </div>
+                            </article>
 
-            }
+                        </td>
+                        <td style="vertical-align:bottom;padding-left:50px;">
+                            <div>
+                                <form id="@book.ProductId" asp-action="AddToCart" asp-controller="Cart" method="post">
+                                    <input type="hidden" name="productId" value="@book.ProductId" />
+                                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                                    <label for="quantity">Quantity:</label>
+                                    <select name="quantity">
+                                        @for (int i = 1; i < numOfChoices; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select> <br />
+                                    <span class="card-text p-1"> <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right"> Add To Cart </button> </span>
+                                </form>
+                                @*The new form element contains hidden input elements specifying the ProductID value
+                                    from the view model and the URL that the browser should be returned to after the cart has been updated*@
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
 
         </section>
 
         <section class="cds">
             <h2> The CDs </h2>
-            @foreach (MusicCD cd in ViewBag.CDs)
-            {<article class="cd">
-                    <div class="top">
-                        <img src="@cd.ImageFileName" alt="@cd.ImageFileName" />
-                        <div>
-                            <p class="title">
-                                <span class="bold">Album: </span> @cd.Title
-                            </p>
-                            <p>
-                                <span class="bold">Artist: </span> @cd.Artist
-                            </p>
-                            <p>
-                                <span class="bold">Price: </span>  @String.Format("{0:0.00}", cd.Price)
-                            </p>
-                            <p>
-                                <span class="bold">Released: </span> @cd.Released
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="bold">Tracks:</p>
-                        <ol>
-                            @foreach (Track track in cd.Tracks)
-                            {
-                                <li>
-                                    <p>Title: @track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</p>
-                                </li>
-                            }
+            <table>
+                @foreach (MusicCD cd in Model.OfType<MusicCD>().ToList())
+                {
+                    <tr>
+                        <td valign="top"> <img src="@cd.ImageFileName" alt="@cd.Title" style="width:100px" /> </td>
+                        <td valign="top" style="width:250px">
+                            <article class="cd">
+                                <div class="top">
 
-                        </ol>
-                        <p><span class="bold">Total playing time: </span>@cd.PlayingTime.ToString(@"hh\:mm\:ss")</p>
-                    </div>
+                                    <div>
+                                        <p class="title">
+                                            <span class="bold">Album: </span> @cd.Title
+                                        </p>
+                                        <p>
+                                            <span class="bold">Artist: </span> @cd.Artist
+                                        </p>
+                                        <p>
+                                            <span class="bold">Price: </span>  @String.Format("{0:0.00}", cd.Price)
+                                        </p>
+                                        <p>
+                                            <span class="bold">Released: </span> @cd.Released
+                                        </p>
+                                    </div>
+                                </div>
+                                @*<div>
+                                        <p class="bold">Tracks:</p>
+                                        <ol>
+                                            @foreach (Track track in cd.Tracks)
+                                            {
+                                                <li>
+                                                    <p>Title: @track.Title (@track.Composer) @track.Length.Minutes:@track.Length.Seconds</p>
+                                                </li>
+                                            }
 
-                </article>
+                                        </ol>
+                                        <p><span class="bold">Total playing time: </span>@cd.PlayingTime.ToString(@"hh\:mm\:ss")</p>
+                                    </div>*@
 
-            }
+                            </article>
+
+
+                        </td>
+                        <td style="vertical-align:bottom;padding-left:50px;">
+                            <div>
+                                <form id="@cd.ProductId" asp-action="AddToCart" asp-controller="Cart" method="post">
+                                    <input type="hidden" name="ProductID" value="@cd.ProductId" />
+                                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                                    <label for="quantity">Quantity:</label>
+                                    <select name="quantity">
+                                        @for (int i = 1; i < numOfChoices; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select> <br />
+                                    <span class="card-text p-1"> <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right"> Add To Cart </button> </span>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
 
         </section>
 
         <section class="movies">
             <h2> The Movies </h2>
-            @foreach (Movie movie in ViewBag.Movies)
-            {<article class="movie">
-                    <p><img src="@movie.ImageFileName" alt="@movie.Title" /></p>
-                    <div>
-                        <p class="title">
-                            <span class="bold">Title: </span> @movie.Title
-                        </p>
-                        <p>
-                            <span class="bold">Director: </span> @movie.Director
-                        </p>
-                        <p><span class="bold">Price:</span> @String.Format("{0:0.00}", movie.Price)</p>
-                    </div>
-                </article>
+            <table>
+                @foreach (Movie movie in Model.OfType<Movie>().ToList())
+                {
+                    <tr>
+                        <td valign="top"> <img src="@movie.ImageFileName" alt="@movie.Title" style="width:100px" /> </td>
+                        <td valign="top" style="width:250px">
 
-            }
+                            <article class="movie">
+
+                                <div>
+                                    <p class="title">
+                                        <span class="bold">Title: </span> @movie.Title
+                                    </p>
+                                    <p>
+                                        <span class="bold">Director: </span> @movie.Director
+                                    </p>
+                                    <p><span class="bold">Price:</span> @String.Format("{0:0.00}", movie.Price)</p>
+                                </div>
+                            </article>
+
+                        </td>
+                        <td style="vertical-align:bottom;padding-left:50px;">
+                            <div>
+                                <form id="@movie.ProductId" asp-action="AddToCart" asp-controller="Cart" method="post">
+                                    <input type="hidden" name="ProductID" value="@movie.ProductId" />
+                                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                                    <label for="quantity">Quantity:</label>
+                                    <select name="quantity">
+                                        @for (int i = 1; i < numOfChoices; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select> <br />
+                                    <span class="card-text p-1"> <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right"> Add To Cart </button> </span>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
 
         </section>
 

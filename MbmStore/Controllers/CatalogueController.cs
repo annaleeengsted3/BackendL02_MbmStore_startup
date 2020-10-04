@@ -30,7 +30,7 @@ namespace MbmStore.Controllers
 
 
 
-            return View();
+            return View(Repository.Products);
         }
     }
 }

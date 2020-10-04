@@ -13,11 +13,12 @@ namespace MbmStore.Models
         {
             get
             {
-                decimal totalPrice = 0;
                 foreach (OrderItem orderItem in OrderItems)
                 {
                     totalPrice = totalPrice + orderItem.TotalPrice;
                 }
+                //alternative solution (need LINQ):
+                //return orderItems.Sum(item=> item.TotalPrice*item.Quantity);
                 return totalPrice;
             }
         }
