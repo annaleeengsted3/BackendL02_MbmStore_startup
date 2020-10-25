@@ -29,6 +29,7 @@ namespace MbmStore.Models
             get { return price; }
         }
         public string ImageFileName { get; set; }
+        public string Category { get; set; }
 
         public Product() { }
         public Product(int productId, string title, decimal price) {

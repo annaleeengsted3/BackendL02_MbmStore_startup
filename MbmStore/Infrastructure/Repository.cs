@@ -22,19 +22,23 @@ namespace MbmStore.Infrastructure
             Book1.ISBN = "9780439554930";
             Book1.Publisher = "Scholastic";
             Book1.ImageFileName = "/Images/harrypotter.jpg";
+            Book1.Category = "Book";
             Book Book2 = new Book(2, "Zachary Auburn", "How To Talk To Your Cat About Gun Safety", 150.00M, 2016);
             Book2.ISBN = "978-0451494924";
             Book2.Publisher = "Three Rivers Press";
             Book2.ImageFileName = "/Images/gunsafety.jpg";
+            Book2.Category = "Book";
 
             MusicCD CD1 = new MusicCD(3, "Hansi Hinterseer", "Javol aus Tyrol", 99, 1994);
             CD1.ImageFileName = "/Images/hansi.jpg";
+            CD1.Category = "Music";
             CD1.AddTrack(new Track("Wir Trinken Alkohol"));
             CD1.AddTrack(new Track("Wir Trinken Sehr Viel Alkohol"));
             CD1.AddTrack(new Track("Ich möchte tanzen, tanzen"));
 
             MusicCD CD2 = new MusicCD(4, "Britney Spears", "...Baby One More Time", 80, 1999);
             CD2.ImageFileName = "/Images/britney.jpg";
+            CD2.Category = "Music";
             CD2.AddTrack(new Track("...Baby One More Time"));
             CD2.AddTrack(new Track("(You Drive Me) Crazy"));
             CD2.AddTrack(new Track("Sometimes"));
@@ -44,6 +48,7 @@ namespace MbmStore.Infrastructure
 
             MusicCD CD3 = new MusicCD(5, "Backstreet Boys", "Backstreets Back", 599, 1997);
             CD3.ImageFileName = "/Images/backstreet.jpg";
+            CD3.Category = "Music";
             CD3.AddTrack(new Track("Everybody"));
             CD3.AddTrack(new Track("As Long As You Love Me"));
             CD3.AddTrack(new Track("I Want It That Way"));
@@ -52,10 +57,12 @@ namespace MbmStore.Infrastructure
             CD3.AddTrack(new Track("All I Have To Give"));
 
             Movie Movie1 = new Movie(6, "Jungle Book", 160, "/Images/junglebook.jpg", "Walt Disney");
+            Movie1.Category = "Movie";
             Movie Movie2 = new Movie(7, "Tarzan", 120, "/Images/tarzan.jpg", "Walt Disney");
+            Movie2.Category = "Movie";
             Movie Movie3 = new Movie(8, "Frozen", 230, "/Images/frozen.jpg", "Walt Disney");
+            Movie3.Category = "Movie";
 
-           
             Products.Add(CD1);
             Products.Add(CD2);
             Products.Add(CD3);

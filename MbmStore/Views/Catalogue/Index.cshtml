@@ -1,22 +1,8 @@
 ﻿@using MbmStore.Models;
 @using MbmStore.Infrastructure;
 @addTagHelper "*, Microsoft.AspNetCore.Mvc.TagHelpers"
-@*@model IEnumerable<Product>*@
 @model ProductsListViewModel
-@{
-    //this just creates the metatitle
-    ViewData["Title"] = "Products";
-}
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Catalogue</title>
-</head>
-<body>
     <h1>Products</h1>
 
     <div class="products">
@@ -59,7 +45,10 @@
         }
 
     </div>
-        <div page-model="@Model.PagingInfo" page-action="Index"></div>
 
-</body>
-</html>
+    <div page-model="@Model.PagingInfo" page-action="Index" page-classes-enabled="true"page-class="btn" 
+         page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
+         class="btn-group pull-right m-1">
+    </div>
+   
+
